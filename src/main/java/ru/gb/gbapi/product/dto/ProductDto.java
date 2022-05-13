@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 import ru.gb.gbapi.category.dto.CategoryDto;
 import ru.gb.gbapi.common.enums.Status;
 
@@ -27,6 +28,7 @@ public class ProductDto {
     @DecimalMin(value = "0.0", inclusive = false)
     @Digits(integer=3, fraction=2)
     private BigDecimal cost;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     @PastOrPresent
     @JsonFormat(pattern="dd.MM.yyyy")
     @JsonDeserialize(using = LocalDateDeserializer.class)
@@ -36,4 +38,6 @@ public class ProductDto {
     private Status status;
     private String manufacturer;
     private Set<CategoryDto> categories;
+    private String shortDescription;
+    private String fullDescription;
 }
